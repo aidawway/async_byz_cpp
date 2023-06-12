@@ -10,7 +10,7 @@
     };
 
 
-    static MPI_Datatype create_mpi_broadcast_message_datatype() 
+    static MPI_Datatype CreateMpiBroadcastMessageDatatype() 
     {
         const int block_lengths[2] = {2, 1};
         const MPI_Datatype datatypes[2] = {MPI_UINT32_T, MPI_INT};
@@ -24,9 +24,7 @@
 
     static MPI_Datatype MPI_BROADCAST_MESSAGE_DATATYPE;
 
-    static void initialize_broadcast_message() {
-        MPI_BROADCAST_MESSAGE_DATATYPE = create_mpi_broadcast_message_datatype();
+    static void InitializeBroadcastMessage() {
+        MPI_BROADCAST_MESSAGE_DATATYPE = CreateMpiBroadcastMessageDatatype();
     }
-
-
 #endif

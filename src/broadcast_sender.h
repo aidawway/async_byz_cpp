@@ -9,6 +9,7 @@
         private:
             int thread_count;
             int id;
+            uint32_t broadcast_source_id;
     
     };
 #endif

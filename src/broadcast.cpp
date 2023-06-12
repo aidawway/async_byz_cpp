@@ -1,16 +1,24 @@
 #include <iostream>
 #include <mpi.h>
-#include <string.h>
+#include <stdint.h>
+
 #include "broadcast.h"
+#include "broadcast_message.h"
+#include "broadcast_sender.h"
 
 
-Broadcast::Broadcast(int id)
+Broadcast::Broadcast(uint32_t id, uint32_t thread_count)
 {
-        std::string message = "Hello from: " + std::to_string(id);
-
-        int dest = 0;
-        int message_tag = 0;
-        MPI_Request req;
-        int message_handle = MPI_Isend(&message, message.length() + 1, MPI_CHAR, dest, message_tag, MPI_COMM_WORLD, &req); //TODO update communicatior
-        MPI_Request_free(&req);
-};
+        BroadcastSender* sender = new BroadcastSender(id, thread_count);
+        
+        
+        struct BroadcastMessage message  = {
+               id,
+               0,
+               MessageType::Initiate
+               
+        };
+        
+        sender -> send(message);
+        delete sender;
+}
